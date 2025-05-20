@@ -1,9 +1,13 @@
 # BREADTH-FIRST-SEARCH
+
 <h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
-<h3>Name:  </h3>
-<h3>Register Number: </h3>
+
+<h3>Name: DHARSHINI K</h3>
+<h3>Register Number: 212223230047</h3>
+
 <H3>Aim:</H3>
 <p>To Implement Breadth First Search Traversal of a Graph using Python 3.</p>
+
 <h3>Theory:</h3>
 <p>Breadth-First Traversal (or Search) for a graph is like the Breadth-First Traversal of a tree.
 The only catch here is that, unlike trees, graphs may contain cycles so that we may come to the same node again. To avoid processing a node more than once, we divide the vertices into two categories:
@@ -54,7 +58,6 @@ As we can see that every neighbours of node 4 are visited, so move to the next n
 Remove node 4 from the front of queue and visit the unvisited neighbours and push them into queue.
 Now, Queue becomes empty, So, terminate these process of iteration.
 
-
 <hr>
 <h2>Algorithm:</h2>
 <hr>
@@ -65,8 +68,53 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 <li>Find its Successors Or neighbors and Check whether the node is visited or not.</li>
 <li>If Not Visited, add it to the Queue. Else Continue.</li>
 <li>Iterate steps 4 and 5 until all nodes get visited, and there are no more unvisited nodes.</li>
-
 </ol>
+
+## Program:
+```PYTHON
+from collections import deque
+from collections import defaultdict
+
+# BFS function definition
+def bfs(graph, start, visited, path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+
+    while queue:
+        tmpnode = queue.popleft()
+        for neighbour in graph[tmpnode]:
+            if not visited[neighbour]:
+                path.append(neighbour)
+                queue.append(neighbour)
+                visited[neighbour] = True
+
+    return path
+
+# Input for number of vertices and edges
+graph = defaultdict(list)
+v, e = map(int, input("Enter number of vertices and edges: ").split())
+
+# Input for edges
+for i in range(e):
+    u, v = input(f"Enter edge {i+1} (format: u v): ").split()
+    graph[u].append(v)
+    graph[v].append(u)  # For undirected graph
+
+# Choose starting node
+start = '0' if '0' in graph else 'A'
+
+# Initialize visited and path
+visited = defaultdict(bool)
+path = []
+
+# Perform BFS traversal
+traversed_path = bfs(graph, start, visited, path)
+
+# Output result
+print("BFS Traversal Path:", traversed_path)
+```
 
 <hr>
 <h3>Sample Input</h3>
@@ -82,6 +130,7 @@ D E <BR>
 D G <BR>
 G F <BR>
 <hr>
+
 <h3>Sample Output</h3>
 <hr>
 ['A', 'B', 'C', 'F', 'E', 'D', 'G']
@@ -105,11 +154,4 @@ G F <BR>
 <hr>
 <h3>Result:</h3>
 <hr>
-<p>Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.</p>
-
-
-
-
-
-
-
+<p>Thus, a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.</p>
